@@ -1,26 +1,18 @@
 package com.kata.rockwell.application;
 
+import com.kata.rockwell.application.mappers.CompositeMapper;
 import com.kata.rockwell.domain.model.NumberService;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class ApplicationService {
     private final NumberService numberService;
-    private final Map<Number, String> mapNumberToAnimals;
-    private final Map<Number, String> mapNumberToFurnitures;
-
-    public ApplicationService(NumberService numberService,
-                              @Qualifier("animals") Map<Number, String> mapNumberToAnimals,
-                              @Qualifier("furnitures") Map<Number, String> mapNumberToFurnitures) {
-        this.numberService = numberService;
-        this.mapNumberToAnimals = mapNumberToAnimals;
-        this.mapNumberToFurnitures = mapNumberToFurnitures;
-    }
+    private final CompositeMapper compositeMapper;
 
     public MappedDivisorsOutput findCorrespondingMappedDivisors(MappedDivisorsInput input) {
         final String name = input.getName();
@@ -29,23 +21,14 @@ public class ApplicationService {
         final MappedDivisorsOutput output = MappedDivisorsOutput.builder().build();
 
         numbers.forEach(n -> {
-            final List<Number> allDivisors = numberService.findAllDivisors(n);
-            final ArrayList<String> strings = new ArrayList<>();
-            for (Number d : allDivisors) {
-                strings.add(getMapping(name).get(d));
-            }
-            output.put(n, strings);
+            output.put(n,
+                    numberService.findAllDivisors(n)
+                    .stream()
+                    .map(d -> compositeMapper.map(name, d))
+                    .collect(Collectors.toList())
+            );
         });
 
         return output;
-    }
-
-    private Map<Number, String> getMapping(String type) {
-        if (type.equals("animals")) {
-            return mapNumberToAnimals;
-        } else if (type.equals("furnitures")) {
-            return mapNumberToFurnitures;
-        }
-        throw new IllegalArgumentException("not supported");
     }
 }
