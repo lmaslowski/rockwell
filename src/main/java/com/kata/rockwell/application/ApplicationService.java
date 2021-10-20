@@ -17,18 +17,24 @@ public class ApplicationService {
     public MappedDivisorsOutput findCorrespondingMappedDivisors(MappedDivisorsInput input) {
         final String name = input.getName();
         final List<Number> numbers = input.getNumbers();
+        throwExceptionIfNumbersAreOutOfRange(numbers);
+        return getMappedDivisorsOutput(name, numbers);
+    }
 
+    private MappedDivisorsOutput getMappedDivisorsOutput(String name, List<Number> numbers) {
         final MappedDivisorsOutput output = MappedDivisorsOutput.builder().build();
-
-        numbers.forEach(n -> {
-            output.put(n,
-                    numberService.findAllDivisors(n)
-                    .stream()
-                    .map(d -> compositeMapper.map(name, d))
-                    .collect(Collectors.toList())
-            );
-        });
-
+        numbers.forEach(n -> output.put(n,
+                numberService.findAllDivisors(n)
+                .stream()
+                .map(d -> compositeMapper.map(name, d))
+                .collect(Collectors.toList())
+        ));
         return output;
+    }
+
+    private void throwExceptionIfNumbersAreOutOfRange(List<Number> numbers) {
+        if(numbers.stream().anyMatch(number -> (int) number > 20 || (int) number < 1)) {
+            throw new IllegalArgumentException("Numbers should be in range from 1 to 20!");
+        }
     }
 }
