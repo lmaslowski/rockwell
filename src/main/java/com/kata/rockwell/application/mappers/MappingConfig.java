@@ -1,4 +1,4 @@
-package com.kata.rockwell.application;
+package com.kata.rockwell.application.mappers;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
