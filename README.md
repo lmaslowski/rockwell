@@ -39,13 +39,13 @@ public static final ArchRule application_should_not_depend_on_spring =
 
 ### Extensibility
 
-In order to add new mapper, ```Mapper``` class has to be extended  
+In order to add new mapper, interface ```Mapper``` should be implemented or ```AbstractMapper``` class has to be extended  
 
 For instance:
 
 ```java
 @Service("cars")
-public class CarsMapper extends Mapper {
+public class CarsMapper extends AbstractMapper {
     public CarsMapper(@Qualifier("cars") Map<Integer, String> map) {
         super(map);
     }
