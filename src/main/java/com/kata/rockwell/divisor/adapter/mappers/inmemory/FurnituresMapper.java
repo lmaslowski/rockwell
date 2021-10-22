@@ -1,4 +1,4 @@
-package com.kata.rockwell.divisor.adapter.mappers;
+package com.kata.rockwell.divisor.adapter.mappers.inmemory;
 
 import com.kata.rockwell.divisor.domain.model.AbstractMapper;
 import org.springframework.beans.factory.annotation.Qualifier;

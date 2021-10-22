@@ -1,5 +1,7 @@
 package com.kata.rockwell.divisor.domain.model;
 
+import com.kata.rockwell.divisor.domain.model.Mapper;
+
 import java.util.HashMap;
 import java.util.Map;
 

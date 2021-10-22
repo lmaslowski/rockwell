@@ -1,7 +1,7 @@
-package com.kata.rockwell.divisor.adapter.mapper;
+package com.kata.rockwell.divisor.adapter.mapper.inmemory;
 
-import com.kata.rockwell.App;
-import com.kata.rockwell.divisor.adapter.mappers.AnimalsMapper;
+import com.kata.rockwell.divisor.DivisorConfig;
+import com.kata.rockwell.divisor.adapter.mappers.inmemory.AnimalsMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = App.class)
+@ContextConfiguration(classes = DivisorConfig.class)
 class AnimalsMapperTest {
 
     @Autowired

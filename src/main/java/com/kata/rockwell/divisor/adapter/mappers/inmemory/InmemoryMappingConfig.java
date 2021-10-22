@@ -1,4 +1,4 @@
-package com.kata.rockwell.divisor.adapter.mappers;
+package com.kata.rockwell.divisor.adapter.mappers.inmemory;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class MappingConfig {
+public class InmemoryMappingConfig {
 
     @Bean
     @Qualifier("animals")

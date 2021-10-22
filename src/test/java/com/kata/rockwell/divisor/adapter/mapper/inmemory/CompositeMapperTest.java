@@ -1,4 +1,4 @@
-package com.kata.rockwell.divisor.adapter.mapper;
+package com.kata.rockwell.divisor.adapter.mapper.inmemory;
 
 import com.kata.rockwell.App;
 import com.kata.rockwell.divisor.domain.model.CompositeMapper;
@@ -26,8 +26,8 @@ class CompositeMapperTest {
     }
 
     @Test
-    void map1() {
-        assertThat(compositeMapper.map("animals", 1)).isEqualTo("Mouse");
+    void map() {
+        assertThat(compositeMapper.map("animalsInMemory", 1)).isEqualTo("Mouse");
         assertThat(compositeMapper.map("furnitures", 1)).isEqualTo("Chair");
     }
 }

@@ -5,12 +5,13 @@ import com.kata.rockwell.divisor.DivisorConfig;
 import com.kata.rockwell.divisor.application.ApplicationService;
 import com.kata.rockwell.divisor.application.MappedDivisorsInput;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -20,12 +21,11 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-//@SpringBootTest
-//@AutoConfigureMockMvc
-@WebMvcTest(controllers = ApplicationServiceController.class)
-@ContextConfiguration(classes = DivisorConfig.class)
-@ExtendWith(SpringExtension.class)
-@Slf4j
+@SpringBootTest
+@AutoConfigureMockMvc
+//@WebMvcTest(controllers = ApplicationServiceController.class)
+//@ContextConfiguration(classes = {DivisorConfig.class})
+//@ExtendWith(SpringExtension.class)
 class ApplicationServiceControllerIT {
 
     @Autowired
