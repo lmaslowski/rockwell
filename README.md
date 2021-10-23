@@ -55,12 +55,35 @@ public class CarsMapper extends AbstractMapper {
 ```java
 @Bean
 @Qualifier("cars")
-public Map<Integer, String> mapToCars() {
-    return new HashMap<>() {{
-        put(1, "Audi");
-        put(2, "Bmw");
-        put(3, "Citroen");
-        put(4, "Dacia");
-    }};
-}
+public Map<Integer, String> mapToCars(){
+        return new HashMap<>(){{
+        put(1,"Audi");
+        put(2,"Bmw");
+        put(3,"Citroen");
+        put(4,"Dacia");
+        }};
+        }
 ```
+
+or
+
+```java
+
+@Service("cars")
+@AllArgsConstructor
+public class CarsMapper implements Mapper {
+
+    private final SpringJpaCarRepository repository;
+
+    @Override
+    public String map(Integer number) {
+        return repository.findById(number).map(Car::getName).orElse("not mapped");
+    }
+}
+
+```
+
+###Helpful commands
+
+Run only integration tests: 
+```mvn clean && mvn install -DskipTests=true && mvn failsafe:integration-test```

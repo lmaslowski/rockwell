@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ControllerAdvice
-public class ExceptionHandlingAdvice {
+class ExceptionHandlingAdvice {
 
     @ExceptionHandler({IllegalArgumentException.class, HttpMessageConversionException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)

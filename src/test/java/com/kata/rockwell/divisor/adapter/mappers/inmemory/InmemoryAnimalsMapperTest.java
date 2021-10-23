@@ -1,10 +1,9 @@
-package com.kata.rockwell.divisor.adapter.mapper.inmemory;
+package com.kata.rockwell.divisor.adapter.mappers.inmemory;
 
-import com.kata.rockwell.divisor.DivisorConfig;
-import com.kata.rockwell.divisor.adapter.mappers.inmemory.AnimalsMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -12,10 +11,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = DivisorConfig.class)
-class AnimalsMapperTest {
+@ContextConfiguration(classes = InMemoryMappingConfig.class)
+//@ContextConfiguration(classes = DivisorConfig.class)
+//@DataJpaTest //running test application properties or with default if not exists
+class InmemoryAnimalsMapperTest {
 
     @Autowired
+    @Qualifier("animalsInMemory")
     private AnimalsMapper animalsMapper;
 
     @Test

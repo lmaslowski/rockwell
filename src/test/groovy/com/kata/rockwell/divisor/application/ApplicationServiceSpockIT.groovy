@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 
 @SpringBootTest
-class ApplicationServiceIT extends Specification {
+class ApplicationServiceSpockIT extends Specification {
     UUID uuid = UUID.randomUUID();
 
     @Autowired
@@ -18,7 +18,7 @@ class ApplicationServiceIT extends Specification {
             println(applicationService)
         then:
             println(applicationService)
-            applicationService.class != ApplicationService
+            applicationService.class == ApplicationService
     }
 
     def 'test spock 0001'() {

@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 
 @Service("animals")
 @AllArgsConstructor
-public class AnimalsMapper implements Mapper {
+class AnimalsMapper implements Mapper {
 
-    private SpringJpaAnimalRepository repository;
+    private final SpringJpaAnimalRepository repository;
 
     @Override
     public String map(Integer number) {

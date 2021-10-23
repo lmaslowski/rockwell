@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 @Service("animalsInMemory")
-public class AnimalsMapper extends AbstractMapper {
+class AnimalsMapper extends AbstractMapper {
     public AnimalsMapper(@Qualifier("animals") Map<Integer, String> map) {
         super(map);
     }

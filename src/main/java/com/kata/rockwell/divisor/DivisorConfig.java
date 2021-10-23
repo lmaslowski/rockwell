@@ -5,13 +5,16 @@ import com.kata.rockwell.divisor.adapter.mappers.db.Car;
 import com.kata.rockwell.divisor.adapter.mappers.db.SpringJpaAnimalRepository;
 import com.kata.rockwell.divisor.adapter.mappers.db.SpringJpaCarRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.h2.tools.Server;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.sql.SQLException;
 import java.util.stream.Stream;
 
 @Configuration
@@ -77,5 +80,10 @@ public class DivisorConfig {
                     .peek(a -> log.info("{}", a))
                     .forEach(springJpaAnimalRepository::save);
         };
+    }
+    @Bean(initMethod = "start", destroyMethod = "stop")
+    @Profile("h2servermode")
+    public Server h2Server() throws SQLException {
+        return Server.createTcpServer("-tcp", "-tcpAllowOthers", "-tcpPort", "9092");
     }
 }

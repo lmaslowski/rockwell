@@ -1,10 +1,6 @@
-package com.kata.rockwell.divisor.adapter.mapper.db;
+package com.kata.rockwell.divisor.adapter.mappers.db;
 
 import com.kata.rockwell.divisor.DivisorConfig;
-import com.kata.rockwell.divisor.adapter.mappers.db.AnimalsMapper;
-import com.kata.rockwell.divisor.adapter.mappers.db.CarsMapper;
-import com.kata.rockwell.divisor.adapter.mappers.db.SpringJpaAnimalRepository;
-import com.kata.rockwell.divisor.adapter.mappers.db.SpringJpaCarRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @ContextConfiguration(classes = {DivisorConfig.class})
-public class AnimalsMapperTests {
+class AnimalsMapperTests {
 
     @Autowired
     private AnimalsMapper animalsMapper;

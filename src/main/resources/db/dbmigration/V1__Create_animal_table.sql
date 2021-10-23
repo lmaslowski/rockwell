@@ -1,0 +1,1 @@
+create table animal (number integer not null, name varchar(255), primary key (number))

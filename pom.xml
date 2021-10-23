@@ -103,7 +103,12 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>8.0.2</version>
         </dependency>
 
         <dependency>
@@ -150,10 +155,7 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/*IT.java</include>
-                        <include>**/*Test.groovy</include>
-                        <include>**/*IT.groovy</include>
+                        <include>**/*.java</include>
                     </includes>
                 </configuration>
             </plugin>
@@ -181,7 +183,7 @@
                 <executions>
                     <execution>
                         <goals>
-<!--                            <goal>compileTests</goal>-->
+                            <goal>compileTests</goal>
                             <goal>addTestSources</goal>
                         </goals>
                     </execution>
@@ -189,25 +191,13 @@
                 <configuration>
                     <testSources>
                         <testSource>
-                            <directory>src/test/java</directory>
-                            <includes>
-                                <include>**/*.java</include>
-                            </includes>
-                        </testSource>
-                        <testSource>
-                            <directory>src/integration-test/java</directory>
-                            <includes>
-                                <include>**/*.java</include>
-                            </includes>
-                        </testSource>
-                        <testSource>
-                            <directory>src/test/groovy</directory>
+                            <directory>${project.basedir}/src/test/groovy</directory>
                             <includes>
                                 <include>**/*.groovy</include>
                             </includes>
                         </testSource>
                         <testSource>
-                            <directory>src/integration-test/groovy</directory>
+                            <directory>${project.basedir}/src/integration-test/groovy</directory>
                             <includes>
                                 <include>**/*.groovy</include>
                             </includes>
@@ -220,9 +210,9 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>8.0.2</version>
                 <configuration>
-                    <url>jdbc:h2:file:~/rockwell4</url>
+                    <url>jdbc:h2:tcp://localhost:9092/file:~/rockwell</url>
                     <user>sa</user>
-                    <password>password</password>
+                    <password>sa</password>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -237,6 +227,17 @@
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>1.12</version>
                 <executions>
+                    <execution>
+                        <id>add-test-source</id>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/integration-test/java</source>
+                            </sources>
+                        </configuration>
+                    </execution>
                     <execution>
                         <id>add-integration-test-resources</id>
                         <phase>generate-test-resources</phase>
@@ -264,7 +265,6 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
-                    <!-- attached to Maven test phase -->
                     <execution>
                         <id>report</id>
                         <phase>test</phase>

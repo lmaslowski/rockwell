@@ -6,6 +6,7 @@ import com.kata.rockwell.divisor.application.ApplicationService;
 import com.kata.rockwell.divisor.application.MappedDivisorsInput;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

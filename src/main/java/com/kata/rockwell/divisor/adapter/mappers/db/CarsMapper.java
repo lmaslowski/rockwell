@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service("cars")
 @AllArgsConstructor
-public class CarsMapper implements Mapper {
+class CarsMapper implements Mapper {
 
     private final SpringJpaCarRepository repository;
 

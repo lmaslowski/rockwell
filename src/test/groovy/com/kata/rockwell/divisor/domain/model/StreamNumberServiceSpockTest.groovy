@@ -10,12 +10,8 @@ class StreamNumberServiceSpockTest extends Specification {
     @Autowired
     private StreamNumberService service;
 
-    def 'test 1'() {
-        given:
-            println("given")
-        when:
-            println("when")
-        then:
+    def 'contextLoad'() {
+        expect:
             service.class == StreamNumberService
     }
 
