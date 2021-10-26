@@ -213,6 +213,9 @@
                     <url>jdbc:h2:tcp://localhost:9092/file:~/rockwell</url>
                     <user>sa</user>
                     <password>sa</password>
+                    <locations>
+                        <location>filesystem:src/main/resources/db/dbmigration</location>
+                    </locations>
                 </configuration>
                 <dependencies>
                     <dependency>

@@ -1,13 +1,22 @@
 package com.kata.rockwell.divisor.application;
 
-import com.kata.rockwell.App;
+import com.google.common.collect.ImmutableMap;
+import com.kata.rockwell.divisor.adapter.mappers.db.AnimalsMapper;
+import com.kata.rockwell.divisor.adapter.mappers.db.SpringJpaAnimalRepository;
+import com.kata.rockwell.divisor.adapter.mappers.inmemory.FurnituresMapper;
+import com.kata.rockwell.divisor.domain.model.CompositeMapper;
+import com.kata.rockwell.divisor.domain.model.StreamNumberService;
+import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.configuration.Configuration;
+import org.flywaydb.core.api.configuration.FluentConfiguration;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,16 +24,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {App.class})
-@SpringBootTest
+@DataJpaTest
 class ApplicationServiceTest {
 
-    @Autowired
     private ApplicationService applicationService;
+
+    @Autowired
+    private SpringJpaAnimalRepository animalRepository;
+
+    @Autowired
+    private DataSource dataSource;
+
+    @BeforeEach
+    void before() {
+        applicationService = new ApplicationService(new StreamNumberService(), new CompositeMapper(
+                ImmutableMap.of(
+                        "animals", new AnimalsMapper(animalRepository),
+                        "furnitures", new FurnituresMapper(new HashMap<>() {{
+                            put(1, "Chair");
+                            put(2, "Table");
+                            put(3, "Cabinet");
+                            put(4, "Bed");
+                        }}))
+        ));
+
+        Configuration flywayConfiguration = new FluentConfiguration()
+                .dataSource(dataSource)
+                .schemas("Public")
+                .locations("classpath:db.migration");
+
+        Flyway flyway = new Flyway(flywayConfiguration);
+        flyway.migrate();
+    }
 
     @Test
     void contextLoad() {
         assertNotNull(applicationService);
+        assertNotNull(animalRepository);
     }
 
     @Test
