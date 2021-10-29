@@ -1,6 +1,5 @@
 package com.kata.rockwell.divisor;
 
-import lombok.extern.slf4j.Slf4j;
 import org.h2.tools.Server;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,6 @@ import java.sql.SQLException;
 
 @Configuration
 @ComponentScan
-@Slf4j
 @EnableAutoConfiguration
 @EnableJpaRepositories
 public class DivisorConfig {

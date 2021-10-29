@@ -11,10 +11,8 @@ import org.flywaydb.core.api.configuration.Configuration;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -23,8 +21,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@ExtendWith(SpringExtension.class)
 @DataJpaTest
+//@ExtendWith(SpringExtension.class) @DataJpa already contains @ExtendWith(SpringExtension.class)
 class ApplicationServiceTest {
 
     private ApplicationService applicationService;
