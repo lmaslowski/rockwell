@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>13</maven.compiler.source>
+        <maven.compiler.target>13</maven.compiler.target>
     </properties>
 
     <parent>
@@ -128,8 +128,9 @@
                 <version>2.22.2</version>
                 <configuration>
                     <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/*IT.java</include>
+                        <include>**/*.java</include>
+<!--                        <include>**/*Test.java</include>-->
+<!--                        <include>**/*IT.java</include>-->
                     </includes>
                 </configuration>
             </plugin>
@@ -157,6 +158,7 @@
                 <executions>
                     <execution>
                         <goals>
+                            <goal>compileTests</goal>
                             <goal>addTestSources</goal>
                         </goals>
                     </execution>
@@ -166,13 +168,13 @@
                         <testSource>
                             <directory>src/test/java</directory>
                             <includes>
-                                <include>**/*.java</include>
+                                <include>**/*.groovy</include>
                             </includes>
                         </testSource>
                         <testSource>
                             <directory>src/integration-test/java</directory>
                             <includes>
-                                <include>**/*.java</include>
+                                <include>**/*.groovy</include>
                             </includes>
                         </testSource>
                     </testSources>
