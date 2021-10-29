@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>13</maven.compiler.source>
+        <maven.compiler.target>13</maven.compiler.target>
     </properties>
 
     <parent>
@@ -155,6 +155,8 @@
                 <configuration>
                     <includes>
                         <include>**/*.java</include>
+<!--                        <include>**/*Test.java</include>-->
+<!--                        <include>**/*IT.java</include>-->
                     </includes>
                 </configuration>
             </plugin>
@@ -178,7 +180,7 @@
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.6.2</version>
+                <version>1.13.0</version>
                 <executions>
                     <execution>
                         <goals>
